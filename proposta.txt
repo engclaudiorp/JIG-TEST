@@ -1,0 +1,95 @@
+ticker = 0                                                                         
+                                                                                   
+valor_max = 0                                                                      
+valor_min = 0                                                                      
+                                                                                   
+                                                                                   
+                                                                                   
+controle_ticker_display() {                                                        
+  switch (ticker) {                                                                
+    case 0: {                                                                      
+      return;                                                                      
+    }                                                                              
+    case 1: {                                                                      
+      display_mostra_ticker_max();                                                 
+    }                                                                              
+    case 2: {                                                                      
+      display_mostra_ticker_min();                                                 
+    }                                                                              
+  }                                                                                
+}                                                                                  
+                                                                                   
+                                                                                   
+tecla_pressionada() {                                                              
+  //driver das teclas                                                              
+  //objetivo é identificar qual tecla foi pressionada                              
+  return key_pressionada;                                                          
+}                             
+
+soma_valor_ticker() {                                                           
+  if (ticker == 1) {                                                            
+    valor_max = valor_max + 1;                                                  
+  } else if (ticker == 2) {                                                     
+    valor_min = valor_min + 1;                                                  
+  }                                                                             
+}                                                                               
+                                                                                
+subtrai_valor_ticker() {                                                        
+  if (ticker == 1) {                                                            
+    valor_max = valor_max - 1;                                                  
+  } else if (ticker == 2) {                                                     
+    valor_min = valor_min - 1;                                                  
+  }                                                                             
+}                                                                               
+                                                                                
+salva_valor() {                                                                 
+  teste_max = valor_max;                                                        
+  teste_min = valor_min;                                                        
+}                                             
+
+controle_tecla() {                                                              
+  //identificar a tecla pressionada                                             
+  key = tecla_pressionada()                                                     
+  switch (key) {                                                                
+    case ESC_SALVA: {                                                                 
+      ticker = 0;                                                               
+      salva_valor();                                                            
+    }                                                                           
+    case MAIS: {                                                                
+      soma_valor();                                                             
+    }                                                                           
+    case MENOS: {                                                               
+      subtrai_valor();                                                          
+    }                                                                           
+    case ENTRA: {  
+      if (ticker == 1) {
+        ticker = 2
+      } else if (ticker == 2) {
+        ticker = 1
+      }
+    }                                                                           
+    default: {                                                                  
+      return;                                                                   
+    }                                                                           
+  }                                                                             
+  //                                                                            
+}                                                 
+
+main {                                                                          
+                                                                                
+  //codigo de inicialização                                                     
+                                                                                
+  salva_valor();                                                                
+                                                                                
+  while (1) {                                                                   
+                                                                                
+    display_mostra_max(valor_max);                                              
+    display_mostra_min(valor_min);                                              
+                                                                                
+    controle_ticker_display();                                                  
+    controle_tecla();                                                           
+  }                                                                             
+}                          
+
+
+
